@@ -115,7 +115,9 @@ int main() {
                 }
             } while (opcaoAluno != 4);
             break;
-
+        
+            //PROFESSORES
+        
         case 2: {
             do {
                 printf("Selecione uma opção\n");
