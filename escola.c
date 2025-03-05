@@ -4,13 +4,13 @@
 #include <string.h>
 #include <locale.h>
 
-struct Aluno {
+struct Aluno { //Estrutura Aluno
     char nome[100];
     char escolaridade[50];
     float numero;
 };
 
-struct Professor {
+struct Professor { //Estrutura Professores
     char nome[100];
     char materia[50];
     float numero;
@@ -20,7 +20,7 @@ int main() {
     struct Aluno alunos[100]; 
     struct Professor professores[100];
     int opcao, opcaoAluno, opcaoProf, cadAluno = 0, cadProf = 0;
-    setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_ALL, "Portuguese"); //Definir o codigo em UTF-8
 
     printf("Selecione uma opção\n");
     printf("1 - Alunos\n");
@@ -52,7 +52,7 @@ int main() {
                         scanf("%s", alunos[cadAluno].escolaridade);
                         getchar();
 
-                        cadAluno++;
+                        cadAluno++; //Cada aluno adicionado recebe +1
 
                         printf("Aluno adicionado com sucesso!\n");
                         break;
@@ -60,7 +60,7 @@ int main() {
 
                     case 2: {
                         printf("Alunos do Sistema\n");
-                        for (int i = 0; i < cadAluno; i++) {
+                        for (int i = 0; i < cadAluno; i++) { //Comando para fazer aparecer os alunos
                             printf("Nome: %s\n", alunos[i].nome);
                             printf("Número: %.2f\n", alunos[i].numero);
                             printf("Escolaridade: %s\n", alunos[i].escolaridade);
@@ -70,20 +70,20 @@ int main() {
                     }
 
                     case 3: {
-                        if (cadAluno == 0) {
+                        if (cadAluno == 0) { //Caso for 0 exibe o printf
                             printf("Nenhum aluno cadastrado para editar\n");
                             break;
                         }
 
-                        char nome[100];
+                        char nome[100]; //Definido fora da struct
 
                         printf("Escreva o nome do aluno que deseja editar: ");
                         scanf("%s", nome);
 
-                        int encontrado = 0;
+                        int encontrado = 0; 
 
-                        for (int i = 0; i < cadAluno; i++) {
-                            if (strcmp(alunos[i].nome, nome) == 0) {
+                        for (int i = 0; i < cadAluno; i++) { 
+                            if (strcmp(alunos[i].nome, nome) == 0) { //strcmp analisa 2 string no caso a nome dentro da struct e a que está fora e igula as 2 a 0
                                 printf("Escreva o novo nome do aluno: ");
                                 scanf("%s", alunos[i].nome);
 
@@ -99,7 +99,7 @@ int main() {
                             }
                         }
 
-                        if (!encontrado) {
+                        if (!encontrado) { 
                             printf("Aluno não encontrado\n");
                         }
 
@@ -148,7 +148,7 @@ int main() {
             
                     case 2: {
                         printf("Professores do Sistema\n");
-                        for (int i = 0; i < cadProf; i++) {
+                        for (int i = 0; i < cadProf; i++) { //Exibir os professores adicionados
                             printf("Nome: %s\n", professores[i].nome);
                             printf("Número: %.2f\n", professores[i].numero);
                             printf("Matéria: %s\n", professores[i].materia);
@@ -158,19 +158,19 @@ int main() {
                     }
             
                     case 3: {
-                        if (cadProf == 0) {
+                        if (cadProf == 0) { //Caso for 0
                             printf("Nenhum professor cadastrado para editar\n");
                             break;
                         }
             
-                        char nome[100];
+                        char nome[100]; //Criando fora da struct
             
                         printf("Escreva o nome do professor que deseja editar: ");
                         scanf("%s", nome);
             
                         int encontrado = 0;
             
-                        for (int i = 0; i < cadProf; i++) {
+                        for (int i = 0; i < cadProf; i++) { 
                             if (strcmp(professores[i].nome, nome) == 0) {
                                 printf("Escreva o novo nome do professor: ");
                                 scanf("%s", professores[i].nome);
