@@ -22,6 +22,88 @@ struct Pedago {
     int numero;
 };
 
+//SALVAR ALUNOS EM UM ARQUIVO .TXT
+void salvarAlunos(struct Aluno alunos[], int total) {
+    FILE *arquivo = fopen("alunos.txt", "w");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo para salvar!\n");
+        return;
+    }
+    for (int i = 0; i < total; i++) {
+        fprintf(arquivo, "%s %d %s\n", alunos[i].nome, alunos[i].numero, alunos[i].escolaridade);
+    }
+    fclose(arquivo);
+}
+
+//SALVAR PEDAGOGICO EM UM ARQUIVO .TXT
+void salvarPedago(struct Pedago pedagogico[], int total) {
+    FILE *arquivo = fopen("pedago.txt", "w");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo para salvar!\n");
+        return;
+    }
+    for (int i = 0; i < total; i++) {
+        fprintf(arquivo, "%s %d %s\n", pedagogico[i].nome, pedagogico[i].numero, pedagogico[i].cargo);
+    }
+    fclose(arquivo);
+}
+
+//SALVAR PROFESSORES EM UM ARQUIVO .TXT
+void salvarProfs(struct Professor professores[], int total) {
+    FILE *arquivo = fopen("profs.txt", "w");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo para salvar!\n");
+        return;
+    }
+    for (int i = 0; i < total; i++) {
+        fprintf(arquivo, "%s %d %s\n", professores[i].nome, professores[i].numero, professores[i].materia);
+    }
+    fclose(arquivo);
+}
+
+
+//CARREGA2 OS ALUNOS SALVOS DO .TXT 
+int carregarAlunos(struct Aluno alunos[]) {
+    FILE *arquivo = fopen("alunos.txt", "r");
+    if (arquivo == NULL) {
+        return 0; // Nenhum dado salvo ainda
+    }
+    int i = 0;
+    while (fscanf(arquivo, "%s %d %s", alunos[i].nome, &alunos[i].numero, alunos[i].escolaridade) != EOF) {
+        i++;
+    }
+    fclose(arquivo);
+    return i; // Retorna o número de alunos carregados
+}
+
+//CARREGA A EQUIPE PEDAGÓGICA SALVA DO .TXT 
+int carregarPedago(struct Pedago pedagogico[]) {
+    FILE *arquivo = fopen("pedago.txt", "r");
+    if (arquivo == NULL) {
+        return 0; // Nenhum dado salvo ainda
+    }
+    int i = 0;
+    while (fscanf(arquivo, "%s %d %s", pedagogico[i].nome, &pedagogico[i].numero, pedagogico[i].cargo) != EOF) {
+        i++;
+    }
+    fclose(arquivo);
+    return i; // Retorna o número de alunos carregados
+}
+
+//CARREGA OS PROFESSORES SALVOS DO .TXT 
+int carregarProfs(struct Professor professores[]) {
+    FILE *arquivo = fopen("profs.txt", "r");
+    if (arquivo == NULL) {
+        return 0; // Nenhum dado salvo ainda
+    }
+    int i = 0;
+    while (fscanf(arquivo, "%s %d %s", professores[i].nome, &professores[i].numero, professores[i].materia) != EOF) {
+        i++;
+    }
+    fclose(arquivo);
+    return i; // Retorna o número de alunos carregados
+}
+
 int main() {
 
     struct Aluno alunos[100]; 
@@ -30,6 +112,10 @@ int main() {
 
     int opcao, opcaoAluno, opcaoProf, opcaoPeda, cadPeda = 0, cadAluno = 0, cadProf = 0;
     setlocale(LC_ALL, "Portuguese");
+
+    cadAluno = carregarAlunos(alunos);
+    cadPeda = carregarPedago(pedagogico);
+    cadProf = carregarProfs(professores);
 
     printf("selecione uma opção\n");
     printf("1 - Alunos\n");
@@ -116,6 +202,7 @@ switch (opcao) {
         }
 
         case 4: 
+        salvarAlunos(alunos, cadAluno);
             printf("Encerrando sistema\n");
             break;
             default:
@@ -123,6 +210,7 @@ switch (opcao) {
             break;
     }
 } while (opcaoAluno != 4);
+break;
 
     case 2: {
         do {
@@ -199,7 +287,8 @@ switch (opcaoProf) {
                     break; 
                 }
         
-    case 4: 
+    case 4:     
+                salvarProfs(professores, cadProf);
                     printf("Encerrando sistema\n");
                     break;
                     default:
@@ -286,6 +375,7 @@ switch (opcaoPeda) {
                     break; 
                 }
     case 4: 
+                salvarPedago(pedagogico, cadPeda);
                     printf("Encerrando sistema\n");
                     break;
                     default:
@@ -296,9 +386,5 @@ switch (opcaoPeda) {
         break;
         }
     }
+    return 0;
 } 
-
-
-
-
-
