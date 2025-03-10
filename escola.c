@@ -62,7 +62,7 @@ void salvarProfs(struct Professor professores[], int total) {
 }
 
 
-//CARREGA2 OS ALUNOS SALVOS DO .TXT 
+//CARREGA OS ALUNOS SALVOS DO .TXT 
 int carregarAlunos(struct Aluno alunos[]) {
     FILE *arquivo = fopen("alunos.txt", "r");
     if (arquivo == NULL) {
@@ -104,6 +104,106 @@ int carregarProfs(struct Professor professores[]) {
     return i; // Retorna o número de alunos carregados
 }
 
+//FUNÇÕES PARA EXCLUIR ALUNOS, PROFESSORES E PEDAGOGICO
+void excluirAluno(struct Aluno alunos[], int *total) {
+    int numeroExcluir;
+    printf("Digite o número do aluno que deseja excluir: ");
+    scanf("%d", &numeroExcluir);
+
+    int encontrado = 0;
+    for (int i = 0; i < *total; i++) {
+        if (alunos[i].numero == numeroExcluir) {
+            encontrado = 1;
+            for (int j = i; j < (*total) - 1; j++) {
+                alunos[j] = alunos[j + 1]; // Desloca os alunos para preencher o espaço
+            }
+            (*total)--; // Reduz o total de alunos
+            break;
+        }
+    }
+
+    if (encontrado) {
+        FILE *arquivo = fopen("alunos.txt", "w");
+        if (arquivo == NULL) {
+            printf("Erro ao abrir o arquivo para salvar!\n");
+            return;
+        }
+        for (int i = 0; i < *total; i++) {
+            fprintf(arquivo, "%s %d %s\n", alunos[i].nome, alunos[i].numero, alunos[i].escolaridade);
+        }
+        fclose(arquivo);
+        printf("Aluno removido com sucesso!\n");
+    } else {
+        printf("Aluno não encontrado.\n");
+    }
+}
+
+void excluirProf(struct Professor professores[], int *total) {
+    int numeroExcluir;
+    printf("Digite o número do professor que deseja excluir: ");
+    scanf("%d", &numeroExcluir);
+
+    int encontrado = 0;
+    for (int i = 0; i < *total; i++) {
+        if (professores[i].numero == numeroExcluir) {
+            encontrado = 1;
+            for (int j = i; j < (*total) - 1; j++) {
+                professores[j] = professores[j + 1]; // Desloca os alunos para preencher o espaço
+            }
+            (*total)--; // Reduz o total de alunos
+            break;
+        }
+    }
+
+    if (encontrado) {
+        FILE *arquivo = fopen("profs.txt", "w");
+        if (arquivo == NULL) {
+            printf("Erro ao abrir o arquivo para salvar!\n");
+            return;
+        }
+        for (int i = 0; i < *total; i++) {
+            fprintf(arquivo, "%s %d %s\n", professores[i].nome, professores[i].numero, professores[i].materia);
+        }
+        fclose(arquivo);
+        printf("Professor removido com sucesso!\n");
+    } else {
+        printf("Professor não encontrado.\n");
+    }
+}
+
+void excluirPedago(struct Pedago pedagogico[], int *total) {
+    int numeroExcluir;
+    printf("Digite o número do membro da equipe que deseja excluir: ");
+    scanf("%d", &numeroExcluir);
+
+    int encontrado = 0;
+    for (int i = 0; i < *total; i++) {
+        if (pedagogico[i].numero == numeroExcluir) {
+            encontrado = 1;
+            for (int j = i; j < (*total) - 1; j++) {
+                pedagogico[j] = pedagogico[j + 1]; // Desloca os alunos para preencher o espaço
+            }
+            (*total)--; // Reduz o total de alunos
+            break;
+        }
+    }
+
+    if (encontrado) {
+        FILE *arquivo = fopen("pedago.txt", "w");
+        if (arquivo == NULL) {
+            printf("Erro ao abrir o arquivo para salvar!\n");
+            return;
+        }
+        for (int i = 0; i < *total; i++) {
+            fprintf(arquivo, "%s %d %s\n", pedagogico[i].nome, pedagogico[i].numero, pedagogico[i].cargo);
+        }
+        fclose(arquivo);
+        printf("Membro removido com sucesso!\n");
+    } else {
+        printf("Membro não encontrado.\n");
+    }
+}
+
 int main() {
 
     struct Aluno alunos[100]; 
@@ -130,7 +230,8 @@ switch (opcao) {
         printf("1 - Adicionar Aluno\n");
         printf("2 - Visualizar Alunos\n");
         printf("3 - Editar Alunos\n");
-        printf("4 - Sair\n");
+        printf("4 - Excluir Alunos\n");
+        printf("5 - Sair\n");
 
         scanf("%d", &opcaoAluno);
 
@@ -201,7 +302,12 @@ switch (opcao) {
                 break; 
         }
 
-        case 4: 
+        case 4:{
+                excluirAluno(alunos, &cadAluno);
+                break;
+        }
+
+        case 5: 
         salvarAlunos(alunos, cadAluno);
             printf("Encerrando sistema\n");
             break;
@@ -209,7 +315,7 @@ switch (opcao) {
             printf("Opção inválida\n");
             break;
     }
-} while (opcaoAluno != 4);
+} while (opcaoAluno != 5);
 break;
 
     case 2: {
@@ -218,7 +324,8 @@ break;
             printf("1 - Adicionar Professor\n");
             printf("2 - Visualizar Professores\n");
             printf("3 - Editar Professores\n");
-            printf("4 - Sair\n");
+            printf("4 - Excluir Professores\n");
+            printf("5 - Sair\n");
         
             scanf("%d", &opcaoProf);
         
@@ -286,8 +393,12 @@ switch (opcaoProf) {
         
                     break; 
                 }
+
+    case 4: {
+        excluirProf(professores, &cadProf);
+    }
         
-    case 4:     
+    case 5:     
                 salvarProfs(professores, cadProf);
                     printf("Encerrando sistema\n");
                     break;
@@ -304,7 +415,8 @@ switch (opcaoProf) {
             printf("1 - Adicionar Equipe Pedagogica\n");
             printf("2 - Visualizar Equipe\n");
             printf("3 - Editar Equipe\n");
-            printf("4 - Sair\n");
+            printf("4 - Excluir Membro\n");
+            printf("5 - Sair\n");
 
             scanf("%d", &opcaoPeda);
 
@@ -374,7 +486,12 @@ switch (opcaoPeda) {
                     }
                     break; 
                 }
-    case 4: 
+
+    case 4: {
+                    excluirPedago(pedagogico, &cadPeda);
+                }
+
+    case 5: 
                 salvarPedago(pedagogico, cadPeda);
                     printf("Encerrando sistema\n");
                     break;
@@ -382,9 +499,9 @@ switch (opcaoPeda) {
                     printf("Opção inválida\n");
                     break;
             }
-} while (opcaoPeda != 4);
+} while (opcaoPeda != 5);
         break;
         }
     }
     return 0;
-} 
+}
