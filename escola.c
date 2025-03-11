@@ -231,7 +231,8 @@ switch (opcao) {
         printf("2 - Visualizar Alunos\n");
         printf("3 - Editar Alunos\n");
         printf("4 - Excluir Alunos\n");
-        printf("5 - Sair\n");
+        printf("5 - Voltar\n");
+        printf("6 - Sair\n");
 
         scanf("%d", &opcaoAluno);
 
@@ -272,20 +273,20 @@ switch (opcao) {
                 break;
             }
 
-                char nome[100];
+                int numero;
 
-                printf("Escreva o nome do aluno que deseja editar: ");
-                scanf("%s", nome);
+                printf("Escreva RA do aluno que deseja editar: ");
+                scanf("%d", &numero);
 
                 int encontrado = 0;
 
                 for (int i = 0; i < cadAluno; i++) {
-                if (strcmp(alunos[i].nome, nome) == 0) {
+                if (alunos[i].numero == numero) {
+                    printf("Escreva o novo RA do aluno: ");
+                    scanf("%d", &alunos[i].numero);
+
                     printf("Escreva o novo nome do aluno: ");
                     scanf("%s", alunos[i].nome);
-
-                    printf("Escreva o novo númmero RA do aluno: ");
-                    scanf("%d", &alunos[i].numero);
 
                     printf("Escreva a nova escolaridade do aluno: ");
                     scanf("%s", alunos[i].escolaridade);
@@ -307,7 +308,13 @@ switch (opcao) {
                 break;
         }
 
-        case 5: 
+        case 5: {
+            printf("Voltando ao inicio...\n");
+            return main();
+            break;
+        }
+
+        case 6: 
         salvarAlunos(alunos, cadAluno);
             printf("Encerrando sistema\n");
             break;
@@ -315,7 +322,7 @@ switch (opcao) {
             printf("Opção inválida\n");
             break;
     }
-} while (opcaoAluno != 5);
+} while (opcaoAluno != 6);
 break;
 
     case 2: {
@@ -325,7 +332,8 @@ break;
             printf("2 - Visualizar Professores\n");
             printf("3 - Editar Professores\n");
             printf("4 - Excluir Professores\n");
-            printf("5 - Sair\n");
+            printf("5 - Voltar\n");
+            printf("6 - Sair\n");
         
             scanf("%d", &opcaoProf);
         
@@ -363,20 +371,20 @@ switch (opcaoProf) {
                         printf("Nenhum professor cadastrado para editar\n");
                         break;
                     }
-                    char nome[100];
+                    int numero;
         
-                    printf("Escreva o nome do professor que deseja editar: ");
-                    scanf("%s", nome);
+                    printf("Escreva o RA do professor que deseja editar: ");
+                    scanf("%d", &numero);
         
                     int encontrado = 0;
         
                     for (int i = 0; i < cadProf; i++) {
-                        if (strcmp( professores[i].nome, nome) == 0) {
+                        if (professores[i].numero == numero) {
+                            printf("Escreva o novo RA do professor: ");
+                            scanf("%d", &professores[i].numero);
+        
                             printf("Escreva o novo nome do professor: ");
                             scanf("%s", professores[i].nome);
-        
-                            printf("Escreva o novo número RA do professor: ");
-                            scanf("%d", &professores[i].numero);
         
                             printf("Escreva a nova materia do professor: ");
                             scanf("%s", professores[i].materia);
@@ -396,9 +404,16 @@ switch (opcaoProf) {
 
     case 4: {
         excluirProf(professores, &cadProf);
+        break;
+    }
+
+    case 5: {
+        printf("Voltando ao inicio...\n");
+        return main();
+        break;
     }
         
-    case 5:     
+    case 6:     
                 salvarProfs(professores, cadProf);
                     printf("Encerrando sistema\n");
                     break;
@@ -406,7 +421,7 @@ switch (opcaoProf) {
                     printf("Opção inválida\n");
                     break;
             }
-} while (opcaoProf != 4);
+} while (opcaoProf != 6);
         break;
 }
     case 3: {
@@ -416,7 +431,8 @@ switch (opcaoProf) {
             printf("2 - Visualizar Equipe\n");
             printf("3 - Editar Equipe\n");
             printf("4 - Excluir Membro\n");
-            printf("5 - Sair\n");
+            printf("5 - Voltar\n");
+            printf("6 - Sair\n");
 
             scanf("%d", &opcaoPeda);
 
@@ -457,23 +473,23 @@ switch (opcaoPeda) {
                         break;
                     }
         
-                    char nome[100];
+                    int numero;
         
-                    printf("Escreva o nome do membro que deseja editar: ");
-                    scanf("%s", nome);
+                    printf("Escreva o RA do membro que deseja editar: ");
+                    scanf("%d", &numero);
         
                     int encontrado = 0;
         
                     for (int i = 0; i < cadPeda; i++) {
-                        if (strcmp( pedagogico[i].nome, nome) == 0) {
-                            printf("Escreva o novo nome do membro: ");
-                            scanf("%s", pedagogico[i].nome);
+                        if ( pedagogico[i].numero == numero) {
+                            printf("Escreva o novo RA do membro: ");
+                            scanf("%d", &pedagogico[i].numero);
         
                             printf("Escreva o novo cargo do membro: ");
                             scanf("%s", pedagogico[i].cargo);
         
-                            printf("Escreva o novo número RA do membro: ");
-                            scanf("%d", &pedagogico[i].numero);
+                            printf("Escreva o novo nome RA do membro: ");
+                            scanf("%s", pedagogico[i].nome);
         
                             printf("Membro editado com sucesso.\n");
                             encontrado = 1;
@@ -488,10 +504,17 @@ switch (opcaoPeda) {
                 }
 
     case 4: {
-                    excluirPedago(pedagogico, &cadPeda);
-                }
+        excluirPedago(pedagogico, &cadPeda);
+        break;
+    }
 
-    case 5: 
+    case 5: {
+        printf("Voltando ao inicio...\n");
+        return main();
+        break;
+    }
+
+    case 6: 
                 salvarPedago(pedagogico, cadPeda);
                     printf("Encerrando sistema\n");
                     break;
@@ -499,7 +522,7 @@ switch (opcaoPeda) {
                     printf("Opção inválida\n");
                     break;
             }
-} while (opcaoPeda != 5);
+} while (opcaoPeda != 6);
         break;
         }
     }
