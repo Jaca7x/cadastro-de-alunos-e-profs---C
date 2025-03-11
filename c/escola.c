@@ -1,3 +1,4 @@
+
 // Bibliotecas
 #include <stdio.h>
 #include <stdlib.h>
@@ -291,7 +292,7 @@ int main()
             case 1:
             {
                 printf("Escreva o nome do aluno: ");
-                scanf("%s", alunos[cadAluno].nome);
+                scanf("%100[^\n]s", alunos[cadAluno].nome);
                 getchar();
 
                 printf("Escreva o número RA do aluno: ");
@@ -299,7 +300,7 @@ int main()
                 getchar();
 
                 printf("Escreva a escolaridade do aluno: ");
-                scanf("%s", alunos[cadAluno].escolaridade);
+                scanf("%100[^\n]s", alunos[cadAluno].escolaridade);
                 getchar();
 
                 cadAluno++;
@@ -344,10 +345,10 @@ int main()
                         scanf("%d", &alunos[i].numero);
 
                         printf("Escreva o novo nome do aluno: ");
-                        scanf("%s", alunos[i].nome);
+                        scanf("%100[^\n]s", alunos[i].nome);
 
                         printf("Escreva a nova escolaridade do aluno: ");
-                        scanf("%s", alunos[i].escolaridade);
+                        scanf("%100[^\n]s", alunos[i].escolaridade);
 
                         printf("Aluno editado com sucesso.\n");
                         encontrado = 1;
@@ -405,7 +406,7 @@ int main()
             case 1:
             {
                 printf("Escreva o nome do Professor: ");
-                scanf("%s", professores[cadProf].nome);
+                scanf("%100[^\n]s", professores[cadProf].nome);
                 getchar();
 
                 printf("Escreva o número RA do professor: ");
@@ -413,7 +414,7 @@ int main()
                 getchar();
 
                 printf("Escreva a materia do Professor: ");
-                scanf("%s", professores[cadProf].materia);
+                scanf("%100[^\n]s", professores[cadProf].materia);
                 getchar();
 
                 cadProf++;
@@ -455,10 +456,10 @@ int main()
                         scanf("%d", &professores[i].numero);
 
                         printf("Escreva o novo nome do professor: ");
-                        scanf("%s", professores[i].nome);
+                        scanf("%100[^\n]s", professores[i].nome);
 
                         printf("Escreva a nova materia do professor: ");
-                        scanf("%s", professores[i].materia);
+                        scanf("%100[^\n]s", professores[i].materia);
 
                         printf("Professor editado com sucesso.\n");
                         encontrado = 1;
@@ -517,11 +518,11 @@ int main()
             case 1:
             {
                 printf("Escreva o nome do membro da equipe: ");
-                scanf("%s", pedagogico[cadPeda].nome);
+                scanf("%100[^\n]s", pedagogico[cadPeda].nome);
                 getchar();
 
                 printf("Escreva o cargo do membro: ");
-                scanf("%s", pedagogico[cadPeda].cargo);
+                scanf("%100[^\n]s", pedagogico[cadPeda].cargo);
                 getchar();
 
                 printf("Escreva o número do RA do membro: ");
@@ -570,10 +571,10 @@ int main()
                         scanf("%d", &pedagogico[i].numero);
 
                         printf("Escreva o novo cargo do membro: ");
-                        scanf("%s", pedagogico[i].cargo);
+                        scanf("%100[^\n]s", pedagogico[i].cargo);
 
                         printf("Escreva o novo nome do membro: ");
-                        scanf("%s", pedagogico[i].nome);
+                        scanf("%100[^\n]s", pedagogico[i].nome);
 
                         printf("Membro editado com sucesso.\n");
                         encontrado = 1;
