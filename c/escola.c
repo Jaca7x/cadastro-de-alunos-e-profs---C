@@ -311,14 +311,21 @@ int main()
             case 2:
             {
                 printf("Alunos do Sistema\n");
-                for (int i = 0; i < cadAluno; i++)
+                if (cadAluno == 0)
                 {
-                    printf("Nome: %s\n", alunos[i].nome);
-                    printf("Número: %d\n", alunos[i].numero);
-                    printf("Escolaridade: %s\n", alunos[i].escolaridade);
-                    printf("-------------------------\n");
+                    printf("Nnehum aluno encontrado");
                 }
-                break;
+                else
+                {
+                    for (int i = 0; i < cadAluno; i++)
+                    {
+                        printf("Nome: %s\n", alunos[i].nome);
+                        printf("Número: %d\n", alunos[i].numero);
+                        printf("Escolaridade: %s\n", alunos[i].escolaridade);
+                        printf("-------------------------\n");
+                    }
+                    break;
+                }
             }
 
             case 3:
@@ -423,15 +430,22 @@ int main()
             }
             case 2:
             {
-                printf("Professores do Sistema\n");
-                for (int i = 0; i < cadProf; i++)
+                if (cadProf == 0)
                 {
-                    printf("Nome: %s\n", professores[i].nome);
-                    printf("Número: %d\n", professores[i].numero);
-                    printf("Materia: %s\n", professores[i].materia);
-                    printf("-------------------------\n");
+                    printf("Nenhum professor encontrado\n");
                 }
-                break;
+                else
+                {
+                    printf("Professores do Sistema\n");
+                    for (int i = 0; i < cadProf; i++)
+                    {
+                        printf("Nome: %s\n", professores[i].nome);
+                        printf("Número: %d\n", professores[i].numero);
+                        printf("Materia: %s\n", professores[i].materia);
+                        printf("-------------------------\n");
+                    }
+                    break;
+                }
             }
             case 3:
             {
