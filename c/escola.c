@@ -290,23 +290,43 @@ int main()
             {
             case 1:
             {
-                printf("Escreva o nome do aluno: ");
-                scanf("%s", alunos[cadAluno].nome);
+                int ra, existe = 0;
+
+                printf("Digite o RA do aluno");
+                scanf("%d", &ra);
                 getchar();
 
-                printf("Escreva o número RA do aluno: ");
-                scanf("%d", &alunos[cadAluno].numero);
-                getchar();
+                for (int i = 0; i < cadAluno; i++)
+                {
+                    if (alunos[i].numero == ra)
+                    {
+                        existe = 1;
+                        break;
+                    }
+                }
 
-                printf("Escreva a escolaridade do aluno: ");
-                scanf("%s", alunos[cadAluno].escolaridade);
-                getchar();
+                if (existe)
+                {
+                    printf("Ja existe um usuario com esse RA\n");
+                }
+                else
+                {
+                    alunos[cadAluno].numero = ra;
 
-                cadAluno++;
+                    printf("Escreva o nome do aluno: ");
+                    scanf("%s", alunos[cadAluno].nome);
+                    getchar();
 
-                printf("Aluno adicionado com sucesso!\n");
-                break;
+                    printf("Escreva a escolaridade do aluno: ");
+                    scanf("%s", alunos[cadAluno].escolaridade);
+                    getchar();
+
+                    cadAluno++;
+
+                    printf("Aluno adicionado com sucesso!\n");
+                }
             }
+            break;
 
             case 2:
             {
@@ -411,22 +431,42 @@ int main()
             {
             case 1:
             {
-                printf("Escreva o nome do Professor: ");
-                scanf("%s", professores[cadProf].nome);
+                int ra, existe = 0;
+                printf("Digite o RA do professor\n");
+                scanf("%d", &ra);
                 getchar();
 
-                printf("Escreva o número RA do professor: ");
-                scanf("%d", &professores[cadProf].numero);
-                getchar();
+                for (int i = 0; i < cadProf; i++)
+                {
+                    if (professores[i].numero == ra)
+                    {
+                        existe = 1;
+                        break;
+                    }
+                }
 
-                printf("Escreva a materia do Professor: ");
-                scanf("%s", professores[cadProf].materia);
-                getchar();
+                if (existe)
+                {
+                    printf("ja existe um professor com esse RA\n");
+                    break;
+                }
+                else
+                {
 
-                cadProf++;
+                    professores[cadProf].numero = ra;
+                    printf("Escreva o nome do Professor: ");
+                    scanf("%s", professores[cadProf].nome);
+                    getchar();
 
-                printf("Professor adicionado com sucesso!\n");
-                break;
+                    printf("Escreva a materia do Professor: ");
+                    scanf("%s", professores[cadProf].materia);
+                    getchar();
+
+                    cadProf++;
+
+                    printf("Professor adicionado com sucesso!\n");
+                    break;
+                }
             }
             case 2:
             {
@@ -530,22 +570,44 @@ int main()
             {
             case 1:
             {
-                printf("Escreva o nome do membro da equipe: ");
-                scanf("%s", pedagogico[cadPeda].nome);
+                int ra, existe = 0;
+
+                printf("Digite o RA do membro da equipe\n");
+                scanf("%d", &ra);
                 getchar();
 
-                printf("Escreva o cargo do membro: ");
-                scanf("%s", pedagogico[cadPeda].cargo);
-                getchar();
+                for (int i = 0; i < cadPeda; i++)
+                {
+                    if (pedagogico[i].numero == ra)
+                    {
+                        existe = 1;
+                        break;
+                    }
+                }
 
-                printf("Escreva o numero do RA do membro: ");
-                scanf("%d", &pedagogico[cadPeda].numero);
-                getchar();
+                if (existe)
+                {
+                    printf("Já existe um membro com esse RA\n");
+                    break;
+                }
+                else
+                {
 
-                cadPeda++;
+                    pedagogico[cadPeda].numero = ra;
 
-                printf("Membro adicionado com sucesso na equipe!\n");
-                break;
+                    printf("Escreva o nome do membro da equipe: ");
+                    scanf("%s", pedagogico[cadPeda].nome);
+                    getchar();
+
+                    printf("Escreva o cargo do membro: ");
+                    scanf("%s", pedagogico[cadPeda].cargo);
+                    getchar();
+
+                    cadPeda++;
+
+                    printf("Membro adicionado com sucesso na equipe!\n");
+                    break;
+                }
             }
 
             case 2:
