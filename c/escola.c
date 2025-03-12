@@ -36,7 +36,7 @@ void salvarAlunos(struct Aluno alunos[], int total)
     }
     for (int i = 0; i < total; i++)
     {
-        fprintf(arquivo, "%s %d %s\n", alunos[i].nome, alunos[i].numero, alunos[i].escolaridade);
+        fprintf(arquivo, "\"%s\" %d \"%s\"\n", alunos[i].nome, alunos[i].numero, alunos[i].escolaridade);
     }
     fclose(arquivo);
 }
@@ -52,7 +52,7 @@ void salvarPedago(struct Pedago pedagogico[], int total)
     }
     for (int i = 0; i < total; i++)
     {
-        fprintf(arquivo, "%s %d %s\n", pedagogico[i].nome, pedagogico[i].numero, pedagogico[i].cargo);
+        fprintf(arquivo, "\"%s\" %d \"%s\"\n", pedagogico[i].nome, pedagogico[i].numero, pedagogico[i].cargo);
     }
     fclose(arquivo);
 }
@@ -68,7 +68,7 @@ void salvarProfs(struct Professor professores[], int total)
     }
     for (int i = 0; i < total; i++)
     {
-        fprintf(arquivo, "%s %d %s\n", professores[i].nome, professores[i].numero, professores[i].materia);
+        fprintf(arquivo, "\"%s\" %d \"%s\"\n", professores[i].nome, professores[i].numero, professores[i].materia);
     }
     fclose(arquivo);
 }
@@ -82,7 +82,7 @@ int carregarAlunos(struct Aluno alunos[])
         return 0; // Nenhum dado salvo ainda
     }
     int i = 0;
-    while (fscanf(arquivo, "%s %d %s", alunos[i].nome, &alunos[i].numero, alunos[i].escolaridade) != EOF)
+    while (fscanf(arquivo, " \"%[^\"]\" %d \"%[^\"]\" ", alunos[i].nome, &alunos[i].numero, alunos[i].escolaridade) != EOF)
     {
         i++;
     }
@@ -99,12 +99,12 @@ int carregarPedago(struct Pedago pedagogico[])
         return 0; // Nenhum dado salvo ainda
     }
     int i = 0;
-    while (fscanf(arquivo, "%s %d %s", pedagogico[i].nome, &pedagogico[i].numero, pedagogico[i].cargo) != EOF)
+    while (fscanf(arquivo, " \"%[^\"]\" %d \"%[^\"]\" ", pedagogico[i].nome, &pedagogico[i].numero, pedagogico[i].cargo) != EOF)
     {
         i++;
     }
     fclose(arquivo);
-    return i; // Retorna o número de alunos carregados
+    return i; // Retorna o número de pedagogos carregados
 }
 
 // CARREGA OS PROFESSORES SALVOS DO .TXT
@@ -116,12 +116,12 @@ int carregarProfs(struct Professor professores[])
         return 0; // Nenhum dado salvo ainda
     }
     int i = 0;
-    while (fscanf(arquivo, "%s %d %s", professores[i].nome, &professores[i].numero, professores[i].materia) != EOF)
+    while (fscanf(arquivo, " \"%[^\"]\" %d \"%[^\"]\" ", professores[i].nome, &professores[i].numero, professores[i].materia) != EOF)
     {
         i++;
     }
     fclose(arquivo);
-    return i; // Retorna o número de alunos carregados
+    return i; // Retorna o número de professores carregados
 }
 
 // FUNÇÕES PARA EXCLUIR ALUNOS, PROFESSORES E PEDAGOGICO
@@ -314,12 +314,14 @@ int main()
                     alunos[cadAluno].numero = ra;
 
                     printf("Escreva o nome do aluno: ");
-                    scanf("%s", alunos[cadAluno].nome);
+                    scanf("%100[^\n]s", alunos[cadAluno].nome);
                     getchar();
+                    fflush(stdin);
 
                     printf("Escreva a escolaridade do aluno: ");
-                    scanf("%s", alunos[cadAluno].escolaridade);
+                    scanf("%100[^\n]s", alunos[cadAluno].escolaridade);
                     getchar();
+                    fflush(stdin);
 
                     cadAluno++;
 
