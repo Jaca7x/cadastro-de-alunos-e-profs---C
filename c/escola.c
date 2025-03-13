@@ -269,6 +269,7 @@ int main()
     printf("1 - Alunos\n");
     printf("2 - Professores\n");
     printf("3 - Pedago\n");
+    printf("4 - Geral\n");
     scanf("%d", &opcao);
 
     switch (opcao)
@@ -314,12 +315,12 @@ int main()
                     alunos[cadAluno].numero = ra;
 
                     printf("Escreva o nome do aluno: ");
-                    scanf("%100[^\n]s", alunos[cadAluno].nome);
+                    scanf("%[^\n]s", alunos[cadAluno].nome);
                     getchar();
                     fflush(stdin);
 
                     printf("Escreva a escolaridade do aluno: ");
-                    scanf("%100[^\n]s", alunos[cadAluno].escolaridade);
+                    scanf("%[^\n]s", alunos[cadAluno].escolaridade);
                     getchar();
                     fflush(stdin);
 
@@ -373,10 +374,12 @@ int main()
                         scanf("%d", &alunos[i].numero);
 
                         printf("Escreva o novo nome do aluno: ");
-                        scanf("%s", alunos[i].nome);
+                        scanf("%[^\n]s", alunos[i].nome);
+                        fflush(stdin);
 
                         printf("Escreva a nova escolaridade do aluno: ");
-                        scanf("%s", alunos[i].escolaridade);
+                        scanf("%[^\n]s", alunos[i].escolaridade);
+                        fflush(stdin);
 
                         printf("Aluno editado com sucesso.\n");
                         encontrado = 1;
@@ -457,12 +460,14 @@ int main()
 
                     professores[cadProf].numero = ra;
                     printf("Escreva o nome do Professor: ");
-                    scanf("%s", professores[cadProf].nome);
+                    scanf("%[^\n]s", professores[cadProf].nome);
                     getchar();
+                    fflush(stdin);
 
                     printf("Escreva a materia do Professor: ");
-                    scanf("%s", professores[cadProf].materia);
+                    scanf("%[^\n]s", professores[cadProf].materia);
                     getchar();
+                    fflush(stdin);
 
                     cadProf++;
 
@@ -511,10 +516,12 @@ int main()
                         scanf("%d", &professores[i].numero);
 
                         printf("Escreva o novo nome do professor: ");
-                        scanf("%s", professores[i].nome);
+                        scanf("%[^\n]s", professores[i].nome);
+                        fflush(stdin);
 
                         printf("Escreva a nova materia do professor: ");
-                        scanf("%s", professores[i].materia);
+                        scanf("%[^\n]s", professores[i].materia);
+                        fflush(stdin);
 
                         printf("Professor editado com sucesso.\n");
                         encontrado = 1;
@@ -598,12 +605,14 @@ int main()
                     pedagogico[cadPeda].numero = ra;
 
                     printf("Escreva o nome do membro da equipe: ");
-                    scanf("%s", pedagogico[cadPeda].nome);
+                    scanf("%[^\n]s", pedagogico[cadPeda].nome);
                     getchar();
+                    fflush(stdin);
 
                     printf("Escreva o cargo do membro: ");
-                    scanf("%s", pedagogico[cadPeda].cargo);
+                    scanf("%[^\n]s", pedagogico[cadPeda].cargo);
                     getchar();
+                    fflush(stdin);
 
                     cadPeda++;
 
@@ -615,14 +624,22 @@ int main()
             case 2:
             {
                 printf("Membros do Sistema\n");
-                for (int i = 0; i < cadPeda; i++)
+
+                if (cadPeda == 0)
                 {
-                    printf("Nome: %s\n", pedagogico[i].nome);
-                    printf("Cargo: %s\n", pedagogico[i].cargo);
-                    printf("Número: %d\n", pedagogico[i].numero);
-                    printf("-------------------------\n");
+                    printf("Nenhum membro cadastrado");
                 }
-                break;
+                else
+                {
+                    for (int i = 0; i < cadPeda; i++)
+                    {
+                        printf("Nome: %s\n", pedagogico[i].nome);
+                        printf("Cargo: %s\n", pedagogico[i].cargo);
+                        printf("Número: %d\n", pedagogico[i].numero);
+                        printf("-------------------------\n");
+                    }
+                    break;
+                }
             }
 
             case 3:
@@ -648,10 +665,12 @@ int main()
                         scanf("%d", &pedagogico[i].numero);
 
                         printf("Escreva o novo cargo do membro: ");
-                        scanf("%s", pedagogico[i].cargo);
+                        scanf("%[^\n]s", pedagogico[i].cargo);
+                        fflush(stdin);
 
                         printf("Escreva o novo nome RA do membro: ");
-                        scanf("%s", pedagogico[i].nome);
+                        scanf("%[^\n]s", pedagogico[i].nome);
+                        fflush(stdin);
 
                         printf("Membro editado com sucesso.\n");
                         encontrado = 1;
@@ -690,6 +709,61 @@ int main()
         } while (opcaoPeda != 6);
         break;
     }
+    case 4:
+        if (cadAluno == 0)
+        {
+            printf("Nenhum aluno cadastrado no sistema1\n\n");
+        }
+        else
+        {
+            // Imprime os alunos
+            printf("---Alunos do Sistema---\n\n");
+            for (int i = 0; i < cadAluno; i++)
+            {
+                printf("Nome: %s\n", alunos[i].nome);
+                printf("Escolaridade: %s\n", alunos[i].escolaridade);
+                printf("Número: %d\n\n", alunos[i].numero);
+                printf("----------------------\n");
+                printf("\n");
+            }
+        }
+
+        if (cadProf == 0)
+        {
+            printf("Nenhum Professor cadastrado no sistema\n\n");
+        }
+        else
+        {
+            // Imprime os professores
+            printf("---Professores no Sistema---\n\n");
+            for (int i = 0; i < cadProf; i++)
+            {
+                printf("Nome: %s\n", professores[i].nome);
+                printf("Matéria: %s\n", professores[i].materia);
+                printf("Número: %d\n\n", professores[i].numero);
+                printf("----------------------\n");
+                printf("\n");
+            }
+        }
+
+        if (cadPeda == 0)
+        {
+            printf("Nnehum membro cadastrado no sistema\n\n");
+        }
+        else
+        {
+            // Imprime os membros pedagógicos
+            printf("---Membros Pedagógicos no Sistema---\n\n");
+            for (int i = 0; i < cadPeda; i++)
+            {
+                printf("Nome: %s\n", pedagogico[i].nome);
+                printf("Cargo: %s\n", pedagogico[i].cargo);
+                printf("Número: %d\n\n", pedagogico[i].numero);
+                printf("----------------------\n");
+                printf("\n");
+            }
+        }
+        break;
     }
     return 0;
 }
